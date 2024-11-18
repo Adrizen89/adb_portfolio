@@ -1,4 +1,4 @@
-name: Déployer l'application Vue.js sur Hostinger
+name: Déploiement SFTP
 
 on:
   push:
@@ -6,29 +6,24 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Cloner le dépôt
         uses: actions/checkout@v3
 
-      - name: Configurer Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+      - name: Construire l'application Vue.js
+        run: |
+          npm install
+          npm run build
 
-      - name: Installer les dépendances
-        run: npm install
-
-      - name: Construire l'application
-        run: npm run build
-
-      - name: Déployer sur Hostinger via FTP
+      - name: Déployer via SFTP
         uses: appleboy/scp-action@v0.1.0
         with:
-          host: ${{ secrets.SFTP_SERVER }}
-          username: ${{ secrets.SFTP_USERNAME }}
-          password: ${{ secrets.SFTP_PASSWORD }}
+          host: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           source: 'dist/*'
           target: '/public_html/'
+          port: 22
