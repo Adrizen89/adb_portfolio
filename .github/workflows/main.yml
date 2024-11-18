@@ -18,12 +18,11 @@ jobs:
           npm install
           npm run build
 
-      - name: Déployer via SFTP
-        uses: appleboy/scp-action@v0.1.0
+      - name: Déployer via FTP
+        uses: SamKirkLand/FTP-Deploy-Action@v4.0.0
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          source: 'dist/*'
-          target: '/public_html/'
-          port: 22
+          local-dir: dist/
+          server-dir: /public_html/
