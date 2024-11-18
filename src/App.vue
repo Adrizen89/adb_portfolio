@@ -42,7 +42,7 @@ onMounted(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 3.6s ease;
+  transition: opacity 3.5s ease;
 }
 .fade-enter-from,
 .fade-leave-to {
