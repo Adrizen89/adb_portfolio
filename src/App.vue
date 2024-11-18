@@ -13,7 +13,7 @@ const route = useRoute()
 onMounted(() => {
   setTimeout(() => {
     isLoading.value = false
-  }, 2000) // 2 secondes
+  }, 2000)
 })
 </script>
 
