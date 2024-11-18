@@ -25,10 +25,10 @@ jobs:
         run: npm run build
 
       - name: Déployer sur Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        uses: appleboy/scp-action@v0.1.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: dist/
-          server-dir: /public_html/
+          host: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          source: 'dist/*'
+          target: '/public_html/'
